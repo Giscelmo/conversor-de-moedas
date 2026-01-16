@@ -16,7 +16,7 @@ public class ConversorMoedas {
     @Override
     public String toString() {
         return ("""
-                Valor %.2f [%s] corresponde ao valor final de %.2f[%s]""".formatted(valorOriginal, baseCode ,valueConvert, targetCode));
+                Valor %.2f [%s] corresponde ao valor final de %.2f [%s]""".formatted(valorOriginal, baseCode ,valueConvert, targetCode));
     }
     /*public void exibeInformacoes() {
         System.out.println("""

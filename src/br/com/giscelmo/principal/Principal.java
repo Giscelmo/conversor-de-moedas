@@ -3,6 +3,8 @@ package br.com.giscelmo.principal;
 import br.com.giscelmo.modelo.ConversorMoedas;
 import br.com.giscelmo.service.ConversorMoedasService;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -11,7 +13,15 @@ public class Principal {
     static void main(String[] args) {
         Scanner leitura = new Scanner(System.in);
         var service = new ConversorMoedasService();
-        List<ConversorMoedas> historico = new ArrayList<>();
+
+        //HISTÓRICO DE LOGS
+        List<String> historico = new ArrayList<>();
+
+        //FORMATO BRASILEIRO DE DATA E HORA
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+
+        // Cria log com data e hora do Brasil
+        LocalDateTime agora = LocalDateTime.now();
 
         boolean iniciar = true;
 
@@ -87,9 +97,13 @@ public class Principal {
             double valueConvert = Double.parseDouble(entrada);
 
             var conversor = service.converter(baseCode, targetCode, valueConvert);
-            System.out.println(conversor);
 
-            historico.add(conversor);
+            // Exibe resultado (usa toString)
+            System.out.println("""
+                    [%s] %s""".formatted(agora.format(formatter), conversor));
+
+            historico.add("""
+                    [%s] %s""".formatted(agora.format(formatter), conversor));
         }
     }
 }
